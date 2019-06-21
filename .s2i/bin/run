@@ -9,14 +9,11 @@ git --version
 # Runs the nodejs application server.
 run_node() {
   echo -e "Environment: \n\tNODE_ENV=${NODE_ENV}"
-  echo -e "Running as user $(id). Updated"
+  echo -e "Running as user $(id)"
   echo "Launching via npm..."
   exec npm run -d $NPM_RUN
 }
 
-# Allow debugging the builder image itself, by using:
-# $ docker run -it nodeshift/centos-s2i-nodejs --debug
-#
-[ "$1" == "--debug" ] && exec /bin/bash
+
 
 run_node
