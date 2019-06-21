@@ -17,6 +17,6 @@ run_node() {
 # Allow debugging the builder image itself, by using:
 # $ docker run -it nodeshift/centos-s2i-nodejs --debug
 #
-[ "$1" == "--debug" ] && exec /bin/bash
+exec /bin/bash
 
 run_node
