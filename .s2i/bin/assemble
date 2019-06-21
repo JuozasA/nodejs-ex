@@ -1,14 +1,6 @@
 #!/bin/bash
 
-set -e
-
-source /usr/libexec/s2i/env
-
-if [ "$DEV_MODE" == true ] ; then
-	set -x
-fi
-
-echo "---> Installing application source. Juozas Juozas!!!!!"
+echo "---> Installing application source..."
 cp -Rfp /tmp/src/. ./
 
 if [ ! -z $HTTP_PROXY ]; then
@@ -37,7 +29,7 @@ if [ ! -z "$NPM_MIRROR" ]; then
 	npm config set registry $NPM_MIRROR
 fi
 
-echo "---> Building your Node application from source"
+echo "---> Building your Node application from source..."
 echo -e "Current git config"
 git config --list
 
@@ -45,33 +37,24 @@ if [ ! -z "$YARN_ENABLED" ]; then
 	echo "---> Using 'yarn install' with YARN_ARGS"
 	npx yarn install $YARN_ARGS
 else
-	echo "---> Installing dependencies"
-	if [ "$DEV_MODE" == true ]; then
-		echo "---> Using 'npm install'"
-		npm install
+	echo "---> Installing dependencies..."
+	HAS_BUILD=$(node -e "console.log(require('./package.json').scripts.build ? true : false)")
 
+	# check to see if there is a build script by inspecting the package.json
+	if [ "$HAS_BUILD" == true ]; then
+		# Do a npm install to get the dev depdencies
+		echo "---> Installing dependencies..."
+		npm install
 		#do not fail when there is no build script
-		echo "---> Building in development mode"
+		echo "---> Building..."
 		npm run build --if-present
 	else
-		HAS_BUILD=$(node -e "console.log(require('./package.json').scripts.build ? true : false)")
-
-		# check to see if there is a build script by inspecting the package.json
-		if [ "$HAS_BUILD" == true ]; then
-			# Do a npm install to get the dev depdencies
-			echo "---> Installing dev dependencies"
-			NODE_ENV=development npm install
-			#do not fail when there is no build script
-			echo "---> Building in production mode"
-			npm run build --if-present
-		else
-			echo "---> Using 'npm install -s --only=production'"
-			npm install -s --only=production
-		fi
-
-		echo "---> Pruning the development dependencies"
-		npm prune
+		echo "---> Using 'npm install'"
+		npm install
 	fi
+
+	echo "---> Pruning dependencies"
+	npm prune
 fi
 
 echo "---> Cleaning up npm cache"
