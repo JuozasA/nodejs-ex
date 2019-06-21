@@ -14,6 +14,6 @@ run_node() {
   exec npm run -d $NPM_RUN
 }
 
-exec /bin/bash
+[ "$1" == "--debug" ] && exec /bin/bash
 
 run_node
