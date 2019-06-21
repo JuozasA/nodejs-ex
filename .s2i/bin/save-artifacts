@@ -1,5 +1,6 @@
 #!/bin/bash
 
 if [ "$(ls ${HOME}/node_modules 2>/dev/null)" ]; then
+  echo "Saving Artifacts"
   tar -C ${HOME} -cf - node_modules
 fi
