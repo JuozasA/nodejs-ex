@@ -8,7 +8,7 @@ if [ "$DEV_MODE" == true ] ; then
 	set -x
 fi
 
-echo "---> Installing application source"
+echo "---> Installing application source. Juozas Juozas!!!!!"
 cp -Rfp /tmp/src/. ./
 
 if [ ! -z $HTTP_PROXY ]; then
