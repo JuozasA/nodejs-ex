@@ -1,14 +1,15 @@
 #!/bin/bash
 
+source /opt/app-root/src/.s2i/bin/generate-container-user
+
 export GIT_COMMITTER_NAME="unknown"
 export and GIT_COMMITTER_EMAIL="unknown@localhost.com"
 git --version
 
 # Runs the nodejs application server.
 run_node() {
-  source /opt/app-root/src/.s2i/bin/generate-container-user
   echo -e "Environment: \n\tNODE_ENV=${NODE_ENV}"
-  echo -e "Running as user $(id)"
+  echo -e "Running as user $(whoami)"
   echo "Launching via npm..."
   exec npm run -d $NPM_RUN
 }
