@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./generate-container-user
+source /opt/app-root/src/.s2i/bin/generate-container-user
 
 export GIT_COMMITTER_NAME="unknown"
 export and GIT_COMMITTER_EMAIL="unknown@localhost.com"
