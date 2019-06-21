@@ -6,6 +6,7 @@ git --version
 
 # Runs the nodejs application server.
 run_node() {
+  source /opt/app-root/src/.s2i/bin/generate-container-user
   echo -e "Environment: \n\tNODE_ENV=${NODE_ENV}"
   echo -e "Running as user $(id)"
   echo "Launching via npm..."
