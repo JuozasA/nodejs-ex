@@ -42,14 +42,11 @@ else
 
 	# check to see if there is a build script by inspecting the package.json
 	if [ "$HAS_BUILD" == true ]; then
-		# Do a npm install to get the dev depdencies
-		echo "---> Installing dependencies..."
 		npm install
 		#do not fail when there is no build script
 		echo "---> Building..."
 		npm run build --if-present
 	else
-		echo "---> Installing dependencies..."
 		npm install
 	fi
 
