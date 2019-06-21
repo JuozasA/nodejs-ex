@@ -14,9 +14,6 @@ run_node() {
   exec npm run -d $NPM_RUN
 }
 
-# Allow debugging the builder image itself, by using:
-# $ docker run -it nodeshift/centos-s2i-nodejs --debug
-#
 exec /bin/bash
 
 run_node
