@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Saving Artifacts"
-
-if [ "$(ls ${HOME}/node_modules 2>/dev/null)" ]; then
-  tar -C ${HOME} -cf - node_modules
+if [ -d "${HOME}/node_modules" ] && [ "$(ls "${HOME}/node_modules" 2>/dev/null)" ]; then
+    tar -C "${HOME}" -cf - node_modules
 fi
