@@ -51,7 +51,7 @@ else
 	fi
 
 	echo "---> Pruning dependencies..."
-	npm prune
+#	npm prune
 fi
 
 echo "---> Cleaning up npm cache..."
