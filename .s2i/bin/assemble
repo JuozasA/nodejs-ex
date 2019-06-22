@@ -1,8 +1,5 @@
 #!/bin/bash
 
-set -e 
-set -x
-
 echo "---> Installing application source..."
 cp -Rfp /tmp/src/. ./
 
@@ -54,7 +51,7 @@ else
 	fi
 
 	echo "---> Pruning dependencies..."
-#	npm prune
+	npm prune
 fi
 
 echo "---> Cleaning up npm cache..."
